@@ -13,8 +13,8 @@ class TodosController extends Controller
     public function index()
     {
         try {
-            $TodosModal = TodosModal::paginate(10);
-            return response()->json($TodosModal);
+            $Task = TodosModal::paginate(10);
+            return response()->json($Task);
         } catch (QueryException $e) {
             return response()->json(['error' => 'An error occurred while fetching tasks'], 500);
         }
@@ -25,9 +25,9 @@ public function show(Request $request)
 {
     try {
         $id = $request->route('id');
-        $todo = TodosModal::findOrFail($id);
+        $Task = TodosModal::findOrFail($id);
 
-        return response()->json($todo);
+        return response()->json($Task);
     } catch (ModelNotFoundException $e) {
         return response()->json(['error' => 'Task not found'], 404);
     } catch (\Exception $e) {
@@ -42,9 +42,9 @@ public function show(Request $request)
                 'status' => 'required|boolean',
             ]);
     
-            $todo = TodosModal::create($validatedData);
+            $Task = TodosModal::create($validatedData);
     
-            return response()->json(['message' => 'Task created sucessfully', 'task' => $todo], 201);
+            return response()->json(['message' => 'Task created sucessfully', 'task' => $Task], 201);
 
         } catch (ValidationException $e) {
             return response()->json(['error' => $e->getMessage()], 422);
@@ -56,16 +56,16 @@ public function show(Request $request)
     public function update(Request $request, $id)
     {
         try {
-            $todo = TodosModal::findOrFail($id);
+            $Task = TodosModal::findOrFail($id);
     
             $validatedData = $request->validate([
                 'title' => 'required|string',
                 'status' => 'required|boolean',
             ]);
     
-            $todo->update($validatedData);
+            $Task->update($validatedData);
     
-            return response()->json(['message' => 'Task updated sucessfully', 'task' => $todo]);
+            return response()->json(['message' => 'Task updated sucessfully', 'task' => $Task]);
 
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Task not found'], 404);
@@ -79,8 +79,8 @@ public function show(Request $request)
     public function destroy($id)
 {
       try {
-        $todo = TodosModal::findOrFail($id);
-        $todo->delete();
+        $Task = TodosModal::findOrFail($id);
+        $Task->delete();
 
         return response()->json(['message' => 'Task deleted successfully'],200);
     } catch (ModelNotFoundException $e) {
@@ -93,10 +93,10 @@ public function show(Request $request)
 public function Markcomplete($id)
 {
     try {
-        $todo = TodosModal::findOrFail($id);
-        $todo->update(['status' => true]);
+        $Task = TodosModal::findOrFail($id);
+        $Task->update(['status' => true]);
 
-        return response()->json(['message' => 'Task status changed to complete', 'task' => $todo],200);
+        return response()->json(['message' => 'Task status changed to complete', 'task' => $Task],200);
     } catch (ModelNotFoundException $e) {
         return response()->json(['error' => 'Task not found'], 404);
     } catch (\Exception $e) {
@@ -106,9 +106,9 @@ public function Markcomplete($id)
 public function markAsIncomplete($id)
 {
     try {
-        $todosModal = TodosModal::findOrFail($id);
-        $todosModal->update(['status' => false]);
-        return response()->json(['message' => 'Task status changed to In-complete', 'task' => $todosModal],200);
+        $Task = TodosModal::findOrFail($id);
+        $Task->update(['status' => false]);
+        return response()->json(['message' => 'Task status changed to In-complete', 'task' => $Task],200);
 
     } catch (ModelNotFoundException $e) {
         return response()->json(['error' => 'Task not found'], 404);
