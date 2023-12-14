@@ -7,6 +7,7 @@ Master ITC Task
 i have make the api end pointis api.php file 
 ### How to Run project 
 connect database in the .evn file 
+
 run  : miggrations
 run  :command composer update
 run   :php artisan serve 

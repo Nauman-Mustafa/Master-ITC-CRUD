@@ -41,7 +41,7 @@ class TodosControllerTest extends TestCase
         $response->assertStatus(201)
         ->assertJsonStructure(['message', 'task'])
         ->assertJson([
-            'message' => 'Task created sucessfully', // Note the spelling difference
+            'message' => 'Task created sucessfully', 
             'task' => [
                 'title' => 'New Task',
                 'status' => false,
@@ -53,7 +53,6 @@ class TodosControllerTest extends TestCase
     public function test_validation_fails_when_creating_task_with_invalid_data()
     {
         $response = $this->json('POST', '/api/createtodo', [
-            //  'title' should be string 
             'title' => 1,
             'status' => false,
         ]);
@@ -74,18 +73,18 @@ class TodosControllerTest extends TestCase
     ]);
 
     if ($response->status() !== 200) {
-        dump($response->content()); // Output the response content for debugging
+        dump($response->content()); 
     }
 
     $response->assertStatus(200)
         ->assertJsonStructure(['message', 'task'])
         ->assertJson([
-            'message' => 'Task updated sucessfully', // Correct the spelling here
+            'message' => 'Task updated sucessfully', 
             'task' => [
                 'title' => 'Updated Taskss',
                 'status' => true,
                 'id' => $task->id,
-                // Add other expected keys as needed
+          
             ]
         ]);
     }
