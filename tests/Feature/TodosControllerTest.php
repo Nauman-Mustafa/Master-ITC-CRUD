@@ -18,7 +18,7 @@ class TodosControllerTest extends TestCase
     {
       
         TodosModal::factory(5)->create();
-        $response = $this->get('/api/alltodos');
+        $response = $this->get('/api/alltask');
         $response->assertStatus(200)
             ->assertJsonStructure(['current_page', 'data', 'total']);
     }
@@ -26,7 +26,7 @@ class TodosControllerTest extends TestCase
     {
       
         $task = TodosModal::factory()->create();
-        $response = $this->get("/api/todo/{$task->id}");
+        $response = $this->get("/api/task/{$task->id}");
         $response->assertStatus(200)
             ->assertJson(['title' => $task->title]);
 
@@ -34,7 +34,7 @@ class TodosControllerTest extends TestCase
     public function test_can_create_task()
     {
 
-        $response = $this->json('POST', '/api/createtodo', [
+        $response = $this->json('POST', '/api/createtask', [
             'title' => 'New Task',
             'status' => false,
         ]);
@@ -52,8 +52,7 @@ class TodosControllerTest extends TestCase
 
     public function test_validation_fails_when_creating_task_with_invalid_data()
     {
-        $response = $this->json('POST', '/api/createtodo', [
-            
+        $response = $this->json('POST', '/api/createtask', [
             'title' => 1,
             'status' => false,
         ]);
@@ -68,7 +67,7 @@ class TodosControllerTest extends TestCase
        
     $task = TodosModal::factory()->create();
 
-    $response = $this->json('PUT', "/api/updatetodo/{$task->id}", [
+    $response = $this->json('PUT', "/api/updatetask/{$task->id}", [
         'title' => 'Updated Taskss',
         'status' => true,
     ]);
@@ -96,7 +95,7 @@ class TodosControllerTest extends TestCase
         $task = TodosModal::factory()->create();
 
        
-        $response = $this->json('PUT', "/api/updatetodo/{$task->id}", [
+        $response = $this->json('PUT', "/api/updatetask/{$task->id}", [
             // missing 'title'
             'status' => false,
         ]);
@@ -107,7 +106,7 @@ class TodosControllerTest extends TestCase
     public function test_update_fails_when_task_not_found()
     {
 
-        $response = $this->json('PUT', '/api/updatetodo/6', [
+        $response = $this->json('PUT', '/api/updatetask/6', [
             'title' => 'Updated Task',
             'status' => true,
         ]);
@@ -121,7 +120,7 @@ class TodosControllerTest extends TestCase
     public function test_can_delete_task()
     {
         $task = TodosModal::factory()->create();
-        $response = $this->json('DELETE', "/api/deletetodo/{$task->id}");
+        $response = $this->json('DELETE', "/api/deletetask/{$task->id}");
         $response->assertStatus(200)
             ->assertJson(['message' => 'Task deleted successfully']);
         $this->assertDatabaseMissing('todos_modals', ['id' => $task->id]);
@@ -129,7 +128,7 @@ class TodosControllerTest extends TestCase
 
     public function test_delete_fails_when_task_not_found()
     {
-        $response = $this->json('DELETE', '/api/deletetodo/1');
+        $response = $this->json('DELETE', '/api/deletetask/1');
         $response->assertStatus(404)
             ->assertJsonStructure(['error']);
 

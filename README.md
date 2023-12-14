@@ -172,7 +172,7 @@ Implemented validation for creating and updating tasks.
   }
   }
 
-  7. mark  Todo as INcomplete
+  7. mark  Task as INcomplete
 
 - **Endpoint:** `PATCH /api/tasks-incomplete/{id}/incomplete`
 - **Description:**   Mark an existing Task as incomplete  by ID.
