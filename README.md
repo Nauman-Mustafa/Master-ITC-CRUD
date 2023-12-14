@@ -52,10 +52,10 @@ Implemented validation for creating and updating tasks.
 ### Sample requests and responses.
 
 
- 1. Get All Todos
+ 1. Get All Task
 
-- **Endpoint:** `GET /api/alltodos`
-- **Description:** Retrieve a paginated list of all todos.
+- **Endpoint:** `GET /api/alltask`
+- **Description:** Retrieve a paginated list of all Task.
 - **Request:**
   - No request parameters required.
 - **Response:**
@@ -65,7 +65,7 @@ Implemented validation for creating and updating tasks.
     "data": [
       {
         "id": 1,
-        "title": "Todo 1",
+        "title": "Task 1",
         "status": true,
         "created_at": "2023-01-01T12:00:00Z",
         "updated_at": "2023-01-01T12:30:00Z"
@@ -74,17 +74,17 @@ Implemented validation for creating and updating tasks.
     "total": 10
   }
 
-   2. Get Todo B id
+   2. Get Task By id
 
-- **Endpoint:** `GET /api/todo/{id}`
-- **Description:**  Retrieve details of a specific todo by its ID.
+- **Endpoint:** `GET /api/task/{id}`
+- **Description:**  Retrieve details of a specific Task by its ID.
 - **Request:**
-  -{id}: ID of the todo
+  -{id}: ID of the Task
 - **Response:**
   ```json
   {
     "id": 1,
-  "title": "Todo 1",
+  "title": "Task 1",
   "status": true,
   "created_at": "2023-01-01T12:00:00Z",
   "updated_at": "2023-01-01T12:30:00Z"
@@ -94,78 +94,78 @@ Implemented validation for creating and updating tasks.
 
 
 
-    3. create Todo
+    3. create Task
 
-- **Endpoint:** `POST /api/createtodo`
-- **Description:**  Create a new todo.
+- **Endpoint:** `POST /api/createtask`
+- **Description:**  Create a new Task.
 - **Request:**
   -{
-  "title": "New Todo",
+  "title": "New Task",
   "status": false
 }
 - **Response:**
   ```json
   {
-    "message": "Todo created successfully",
+    "message": "Task created successfully",
   "task": {
     "id": 11,
-    "title": "New Todo",
+    "title": "New Task",
     "status": false,
     "created_at": "2023-01-02T14:00:00Z",
     "updated_at": "2023-01-02T14:00:00Z"
   }
   }
 
-      4. update  Todo
+      4. update  Task
 
-- **Endpoint:** `PUT /api/updatetodo/{id}`
-- **Description:**  Update an existing todo by ID.
+- **Endpoint:** `PUT /api/updatetask/{id}`
+- **Description:**  Update an existing Task by ID.
 - **Request:**
   -{
-  "title": "Updated Todo",
+  "title": "Updated Task",
   "status": true
 }
 - **Response:**
   ```json
   {
-     "message": "Todo updated successfully",
+     "message": "Task updated successfully",
   "task": {
     "id": 11,
-    "title": "Updated Todo",
+    "title": "Updated Task",
     "status": true,
     "created_at": "2023-01-02T14:00:00Z",
     "updated_at": "2023-01-03T10:30:00Z"
   }
   }
 
-     5. delete  Todo
+     5. delete  Task
 
-- **Endpoint:** `DELETE /api/deletetodo/{id}`
-- **Description:**  Delete an existing todo by ID.
+- **Endpoint:** `DELETE /api/deletetask/{id}`
+- **Description:**  Delete an existing Task by ID.
 - **Request:**
   - (No request body needed)
 - **Response:**
   ```json
   {
-    "message": "Todo deleted successfully"
+    "message": "Task deleted successfully"
   }
 
 
     
 
-   6. mark  Todo as complete
+   6. mark  Task as complete
 
 - **Endpoint:** `PATCH /api/taskdone/{id}/complete`
-- **Description:**   Mark an existing todo as complete by ID.
+- **Description:**   Mark an existing Task as complete by ID.
 - **Request:**
   - (No request body needed)
 - **Response:**
   ```json
   {
-    "message": "Todo status changed to complete",
+    "message": "Task status changed to complete",
   "task": {
     "id": 11,
-    "title": "Existing Todo",
+    "title": "Existing Task",
     "status": true,
     "created_at": "2023-01-02T14:00:00Z",
     "updated_at": "2023-01-03T10:30:00Z"
@@ -175,16 +175,16 @@ Implemented validation for creating and updating tasks.
   7. mark  Todo as INcomplete
 
 - **Endpoint:** `PATCH /api/tasks-incomplete/{id}/incomplete`
-- **Description:**   Mark an existing todo as incomplete  by ID.
+- **Description:**   Mark an existing Task as incomplete  by ID.
 - **Request:**
   - (No request body needed)
 - **Response:**
   ```json
   {
-    "message": "Todo status changed to incomplete",
+    "message": "Task status changed to incomplete",
   "task": {
     "id": 11,
-    "title": "Existing Todo",
+    "title": "Existing Task",
     "status": false,
     "created_at": "2023-01-02T14:00:00Z",
     "updated_at": "2023-01-03T10:30:00Z"

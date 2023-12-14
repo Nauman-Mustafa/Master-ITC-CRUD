@@ -19,12 +19,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/alltodos', [TodosController::class, 'index']);
-Route::get('/todo/{id}', [TodosController::class, 'show']);
+Route::get('/alltask', [TodosController::class, 'index']);
+Route::get('/task/{id}', [TodosController::class, 'show']);
 
-Route::post('/createtodo', [TodosController::class, 'store']);
-Route::put('/updatetodo/{id}', [TodosController::class, 'update']);
-Route::delete('/deletetodo/{id}', [TodosController::class, 'destroy']);
+Route::post('/createtask', [TodosController::class, 'store']);
+Route::put('/updatetask/{id}', [TodosController::class, 'update']);
+Route::delete('/deletetask/{id}', [TodosController::class, 'destroy']);
 Route::patch('/taskdone/{id}/complete', [TodosController::class, 'Markcomplete']);
 Route::patch('/tasks-incomplete/{id}/incomplete', [TodosController::class, 'markAsIncomplete']);
 
